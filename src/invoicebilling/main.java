@@ -14,7 +14,13 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+            static String dbUsername = "";
+            static String dbPassword = "";
+
+            static String jdbcUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;databaseName=...;user=...;password=...;encrypt=true;trustServerCertificate=true;";
+            public static void main(String[] args) {
+                LoginFrame loginFrame = new LoginFrame();
+                loginFrame.setVisible(true);
     }
     
 }
