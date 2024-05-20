@@ -22,6 +22,6 @@ public class main {
             LoginFrame loginFrame = new LoginFrame();
             loginFrame.setVisible(true);
     }
-    
+    }
     
 }
