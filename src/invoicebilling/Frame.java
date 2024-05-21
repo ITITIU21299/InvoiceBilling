@@ -26,6 +26,7 @@ public class Frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        loginButton1 = new javax.swing.JLabel();
         loginButton = new javax.swing.JLabel();
         backGround = new javax.swing.JLabel();
 
@@ -36,8 +37,28 @@ public class Frame extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(null);
 
-        loginButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin23.png"))); // NOI18N
+        loginButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInButton.png"))); // NOI18N
+        loginButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginButton1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                loginButton1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                loginButton1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                loginButton1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                loginButton1MouseReleased(evt);
+            }
+        });
+        getContentPane().add(loginButton1);
+        loginButton1.setBounds(400, 630, 200, 53);
+
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInButton.png"))); // NOI18N
         loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 loginButtonMouseClicked(evt);
@@ -91,6 +112,26 @@ public class Frame extends javax.swing.JFrame {
         loginFrame.setVisible(true);
     }//GEN-LAST:event_loginButtonMouseClicked
 
+    private void loginButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButton1MouseClicked
+
+    private void loginButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButton1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButton1MouseEntered
+
+    private void loginButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButton1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButton1MouseExited
+
+    private void loginButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButton1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButton1MousePressed
+
+    private void loginButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButton1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButton1MouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -130,5 +171,6 @@ public class Frame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backGround;
     private javax.swing.JLabel loginButton;
+    private javax.swing.JLabel loginButton1;
     // End of variables declaration//GEN-END:variables
 }
