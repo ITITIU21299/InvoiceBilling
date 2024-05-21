@@ -26,6 +26,8 @@ public class Frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        loginParent = new javax.swing.JPanel();
+        loginButton = new javax.swing.JLabel();
         login = new javax.swing.JLabel();
         backGround = new javax.swing.JLabel();
 
@@ -36,10 +38,33 @@ public class Frame extends javax.swing.JFrame {
         setSize(720,720);
         getContentPane().setLayout(null);
 
+        loginParent.setLayout(null);
+
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loginButton.png"))); // NOI18N
+        loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                loginButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                loginButtonMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                loginButtonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                loginButtonMouseReleased(evt);
+            }
+        });
+        loginParent.add(loginButton);
+        loginButton.setBounds(250, 260, 104, 37);
+
         login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login.png"))); // NOI18N
         login.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(login);
-        login.setBounds(50, 280, 610, 350);
+        loginParent.add(login);
+        login.setBounds(0, -10, 600, 350);
+
+        getContentPane().add(loginParent);
+        loginParent.setBounds(60, 340, 600, 330);
 
         backGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/background.png"))); // NOI18N
         getContentPane().add(backGround);
@@ -47,6 +72,26 @@ public class Frame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseEntered
+        // TODO add your handling code here:
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loginHover.png")));
+    }//GEN-LAST:event_loginButtonMouseEntered
+
+    private void loginButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseExited
+        // TODO add your handling code here:
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loginButton.png")));
+    }//GEN-LAST:event_loginButtonMouseExited
+
+    private void loginButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMousePressed
+        // TODO add your handling code here:
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loginPress.png")));
+    }//GEN-LAST:event_loginButtonMousePressed
+
+    private void loginButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseReleased
+        // TODO add your handling code here:
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loginButton.png")));
+    }//GEN-LAST:event_loginButtonMouseReleased
 
     /**
      * @param args the command line arguments
@@ -87,5 +132,7 @@ public class Frame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backGround;
     private javax.swing.JLabel login;
+    private javax.swing.JLabel loginButton;
+    private javax.swing.JPanel loginParent;
     // End of variables declaration//GEN-END:variables
 }
