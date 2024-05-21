@@ -35,7 +35,8 @@ public class SignUpFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signUpButton.png"))); // NOI18N
+        signUpButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup23.png"))); // NOI18N
         signUpButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 signUpButtonMouseEntered(evt);
@@ -51,7 +52,7 @@ public class SignUpFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(signUpButton);
-        signUpButton.setBounds(210, 520, 200, 51);
+        signUpButton.setBounds(230, 510, 180, 80);
 
         passWordField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         passWordField.setForeground(new java.awt.Color(255, 255, 255));
@@ -191,22 +192,22 @@ public class SignUpFrame extends javax.swing.JFrame {
 
     private void signUpButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseEntered
         // TODO add your handling code here:
-        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInHover.png")));
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup25.png")));
     }//GEN-LAST:event_signUpButtonMouseEntered
 
     private void signUpButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseExited
         // TODO add your handling code here:
-        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInButton.png")));
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup23.png")));
     }//GEN-LAST:event_signUpButtonMouseExited
 
     private void signUpButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMousePressed
         // TODO add your handling code here:
-        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInClick.png")));
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup23.png")));
     }//GEN-LAST:event_signUpButtonMousePressed
 
     private void signUpButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseReleased
         // TODO add your handling code here:
-        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInButton.png")));
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup25.png")));
     }//GEN-LAST:event_signUpButtonMouseReleased
 
     /**
