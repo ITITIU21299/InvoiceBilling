@@ -26,6 +26,7 @@ public class loginFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        loginButton1 = new javax.swing.JLabel();
         loginButton = new javax.swing.JLabel();
         userNameTxt = new javax.swing.JTextField();
         passWordField = new javax.swing.JPasswordField();
@@ -33,8 +34,25 @@ public class loginFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(640, 640));
-        setPreferredSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(null);
+
+        loginButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup23.png"))); // NOI18N
+        loginButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                loginButton1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                loginButton1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                loginButton1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                loginButton1MouseReleased(evt);
+            }
+        });
+        getContentPane().add(loginButton1);
+        loginButton1.setBounds(240, 540, 200, 56);
 
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInButton.png"))); // NOI18N
         loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,6 +192,22 @@ public class loginFrame extends javax.swing.JFrame {
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInButton.png")));
     }//GEN-LAST:event_loginButtonMouseReleased
 
+    private void loginButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButton1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButton1MouseEntered
+
+    private void loginButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButton1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButton1MouseExited
+
+    private void loginButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButton1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButton1MousePressed
+
+    private void loginButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButton1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButton1MouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -212,6 +246,7 @@ public class loginFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JLabel loginButton;
+    private javax.swing.JLabel loginButton1;
     private javax.swing.JPasswordField passWordField;
     private javax.swing.JTextField userNameTxt;
     // End of variables declaration//GEN-END:variables
