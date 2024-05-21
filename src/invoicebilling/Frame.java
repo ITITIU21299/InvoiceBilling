@@ -27,6 +27,9 @@ public class Frame extends javax.swing.JFrame {
     private void initComponents() {
 
         loginParent = new javax.swing.JPanel();
+        userNameTxt = new javax.swing.JTextField();
+        passWordTxt = new javax.swing.JTextField();
+        passWordField = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JLabel();
         login = new javax.swing.JLabel();
         backGround = new javax.swing.JLabel();
@@ -39,6 +42,80 @@ public class Frame extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         loginParent.setLayout(null);
+
+        userNameTxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        userNameTxt.setForeground(new java.awt.Color(255, 255, 255));
+        userNameTxt.setText("Username");
+        userNameTxt.setBorder(null);
+        userNameTxt.setMinimumSize(new java.awt.Dimension(67, 25));
+        userNameTxt.setOpaque(false);
+        userNameTxt.setPreferredSize(new java.awt.Dimension(90, 26));
+        userNameTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                userNameTxtFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                userNameTxtFocusLost(evt);
+            }
+        });
+        userNameTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userNameTxtMouseClicked(evt);
+            }
+        });
+        userNameTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userNameTxtActionPerformed(evt);
+            }
+        });
+        loginParent.add(userNameTxt);
+        userNameTxt.setBounds(155, 115, 310, 50);
+
+        passWordTxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        passWordTxt.setForeground(new java.awt.Color(255, 255, 255));
+        passWordTxt.setText("Password");
+        passWordTxt.setBorder(null);
+        passWordTxt.setMinimumSize(new java.awt.Dimension(67, 25));
+        passWordTxt.setOpaque(false);
+        passWordTxt.setPreferredSize(new java.awt.Dimension(90, 26));
+        passWordTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passWordTxtFocusLost(evt);
+            }
+        });
+        passWordTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passWordTxtMouseClicked(evt);
+            }
+        });
+        passWordTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passWordTxtActionPerformed(evt);
+            }
+        });
+        loginParent.add(passWordTxt);
+        passWordTxt.setBounds(20, 250, 310, 50);
+
+        passWordField.setText("Password");
+        passWordField.setBorder(null);
+        passWordField.setOpaque(false);
+        passWordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passWordFieldFocusLost(evt);
+            }
+        });
+        passWordField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passWordFieldMouseClicked(evt);
+            }
+        });
+        passWordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passWordFieldActionPerformed(evt);
+            }
+        });
+        loginParent.add(passWordField);
+        passWordField.setBounds(155, 185, 310, 50);
 
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loginButton.png"))); // NOI18N
         loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -93,6 +170,64 @@ public class Frame extends javax.swing.JFrame {
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loginButton.png")));
     }//GEN-LAST:event_loginButtonMouseReleased
 
+    private void passWordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passWordTxtActionPerformed
+
+    private void userNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userNameTxtActionPerformed
+
+    private void userNameTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTxtFocusLost
+        // TODO add your handling code here:
+        if (userNameTxt.getText().isEmpty()){
+            userNameTxt.setText("Username");
+        }
+    }//GEN-LAST:event_userNameTxtFocusLost
+
+    private void userNameTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTxtFocusGained
+
+    }//GEN-LAST:event_userNameTxtFocusGained
+
+    private void userNameTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameTxtMouseClicked
+        // TODO add your handling code here:
+        if (userNameTxt.getText().equals("Username")){
+            userNameTxt.setText("");
+        }
+    }//GEN-LAST:event_userNameTxtMouseClicked
+
+    private void passWordTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passWordTxtFocusLost
+        // TODO add your handling code here:
+        if (passWordTxt.getText().isEmpty()){
+            passWordTxt.setText("Password");
+        }
+    }//GEN-LAST:event_passWordTxtFocusLost
+
+    private void passWordTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passWordTxtMouseClicked
+        // TODO add your handling code here:
+        if (passWordTxt.getText().equals("Password")){
+            passWordTxt.setText("");
+        }
+    }//GEN-LAST:event_passWordTxtMouseClicked
+
+    private void passWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passWordFieldActionPerformed
+
+    private void passWordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passWordFieldMouseClicked
+        // TODO add your handling code here:
+        if (passWordField.getText().equals("Password")){
+            passWordField.setText("");
+        }
+    }//GEN-LAST:event_passWordFieldMouseClicked
+
+    private void passWordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passWordFieldFocusLost
+        // TODO add your handling code here:
+        if (passWordField.getText().isEmpty()){
+            passWordField.setText("Password");
+        }
+    }//GEN-LAST:event_passWordFieldFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -134,5 +269,8 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel login;
     private javax.swing.JLabel loginButton;
     private javax.swing.JPanel loginParent;
+    private javax.swing.JPasswordField passWordField;
+    private javax.swing.JTextField passWordTxt;
+    private javax.swing.JTextField userNameTxt;
     // End of variables declaration//GEN-END:variables
 }
