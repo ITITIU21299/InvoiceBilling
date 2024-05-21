@@ -8,12 +8,12 @@ package invoicebilling;
  *
  * @author nguye
  */
-public class LoginFrame extends javax.swing.JFrame {
+public class Frame extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginFrame
      */
-    public LoginFrame() {
+    public Frame() {
         initComponents();
     }
 
@@ -26,21 +26,24 @@ public class LoginFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(720, 720));
-        setResizable(false);
-        setSize(new java.awt.Dimension(720, 720));
+        login = new javax.swing.JLabel();
+        backGround = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Invoice Billing System");
+        setMinimumSize(new java.awt.Dimension(720, 720));
+        setPreferredSize(new java.awt.Dimension(0, 0));
+        setSize(720,720);
+        getContentPane().setLayout(null);
+
+        login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login.png"))); // NOI18N
+        login.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(login);
+        login.setBounds(50, 280, 610, 350);
+
+        backGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/background.png"))); // NOI18N
+        getContentPane().add(backGround);
+        backGround.setBounds(0, 0, 720, 720);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -62,24 +65,27 @@ public class LoginFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginFrame().setVisible(true);
+                new Frame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel backGround;
+    private javax.swing.JLabel login;
     // End of variables declaration//GEN-END:variables
 }

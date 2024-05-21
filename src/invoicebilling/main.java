@@ -17,8 +17,8 @@ public class main {
 
         static String jdbcUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;databaseName=...;user=...;password=...;encrypt=true;trustServerCertificate=true;";
     public static void main(String[] args) {
-            LoginFrame loginFrame = new LoginFrame();
-            loginFrame.setVisible(true);
+            Frame Frame = new Frame();
+            Frame.setVisible(true);
     }
     }
     
