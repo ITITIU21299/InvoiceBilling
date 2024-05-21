@@ -26,21 +26,188 @@ public class SignUpFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        signUpButton = new javax.swing.JLabel();
+        passWordField = new javax.swing.JPasswordField();
+        userNameTxt = new javax.swing.JTextField();
+        passWordField1 = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signUpButton.png"))); // NOI18N
+        signUpButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                signUpButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                signUpButtonMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                signUpButtonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                signUpButtonMouseReleased(evt);
+            }
+        });
+        getContentPane().add(signUpButton);
+        signUpButton.setBounds(210, 520, 200, 51);
+
+        passWordField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        passWordField.setForeground(new java.awt.Color(255, 255, 255));
+        passWordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        passWordField.setText("Password");
+        passWordField.setBorder(null);
+        passWordField.setOpaque(false);
+        passWordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passWordFieldFocusLost(evt);
+            }
+        });
+        passWordField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passWordFieldMouseClicked(evt);
+            }
+        });
+        passWordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passWordFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(passWordField);
+        passWordField.setBounds(110, 400, 410, 70);
+
+        userNameTxt.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        userNameTxt.setForeground(new java.awt.Color(255, 255, 255));
+        userNameTxt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        userNameTxt.setText("Username");
+        userNameTxt.setBorder(null);
+        userNameTxt.setMinimumSize(new java.awt.Dimension(67, 25));
+        userNameTxt.setOpaque(false);
+        userNameTxt.setPreferredSize(new java.awt.Dimension(90, 26));
+        userNameTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                userNameTxtFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                userNameTxtFocusLost(evt);
+            }
+        });
+        userNameTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userNameTxtMouseClicked(evt);
+            }
+        });
+        userNameTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userNameTxtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(userNameTxt);
+        userNameTxt.setBounds(110, 180, 410, 70);
+
+        passWordField1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        passWordField1.setForeground(new java.awt.Color(255, 255, 255));
+        passWordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        passWordField1.setText("Password");
+        passWordField1.setBorder(null);
+        passWordField1.setOpaque(false);
+        passWordField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passWordField1FocusLost(evt);
+            }
+        });
+        passWordField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passWordField1MouseClicked(evt);
+            }
+        });
+        passWordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passWordField1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(passWordField1);
+        passWordField1.setBounds(110, 290, 410, 70);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sign-up.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 710, 640);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void passWordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passWordFieldFocusLost
+        // TODO add your handling code here:
+        if (passWordField.getText().isEmpty()){
+            passWordField.setText("Password");
+        }
+    }//GEN-LAST:event_passWordFieldFocusLost
+
+    private void passWordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passWordFieldMouseClicked
+        // TODO add your handling code here:
+        if (passWordField.getText().equals("Password")){
+            passWordField.setText("");
+        }
+    }//GEN-LAST:event_passWordFieldMouseClicked
+
+    private void passWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passWordFieldActionPerformed
+
+    private void userNameTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTxtFocusGained
+
+    }//GEN-LAST:event_userNameTxtFocusGained
+
+    private void userNameTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTxtFocusLost
+        // TODO add your handling code here:
+        if (userNameTxt.getText().isEmpty()){
+            userNameTxt.setText("Username");
+        }
+    }//GEN-LAST:event_userNameTxtFocusLost
+
+    private void userNameTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameTxtMouseClicked
+        // TODO add your handling code here:
+        if (userNameTxt.getText().equals("Username")){
+            userNameTxt.setText("");
+        }
+    }//GEN-LAST:event_userNameTxtMouseClicked
+
+    private void userNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userNameTxtActionPerformed
+
+    private void passWordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passWordField1FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passWordField1FocusLost
+
+    private void passWordField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passWordField1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passWordField1MouseClicked
+
+    private void passWordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passWordField1ActionPerformed
+
+    private void signUpButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseEntered
+        // TODO add your handling code here:
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInHover.png")));
+    }//GEN-LAST:event_signUpButtonMouseEntered
+
+    private void signUpButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseExited
+        // TODO add your handling code here:
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInButton.png")));
+    }//GEN-LAST:event_signUpButtonMouseExited
+
+    private void signUpButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMousePressed
+        // TODO add your handling code here:
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInClick.png")));
+    }//GEN-LAST:event_signUpButtonMousePressed
+
+    private void signUpButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseReleased
+        // TODO add your handling code here:
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInButton.png")));
+    }//GEN-LAST:event_signUpButtonMouseReleased
 
     /**
      * @param args the command line arguments
@@ -78,5 +245,10 @@ public class SignUpFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPasswordField passWordField;
+    private javax.swing.JPasswordField passWordField1;
+    private javax.swing.JLabel signUpButton;
+    private javax.swing.JTextField userNameTxt;
     // End of variables declaration//GEN-END:variables
 }
