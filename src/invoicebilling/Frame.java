@@ -36,7 +36,8 @@ public class Frame extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(null);
 
-        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInButton.png"))); // NOI18N
+        loginButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin23.png"))); // NOI18N
         loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 loginButtonMouseClicked(evt);
@@ -55,7 +56,7 @@ public class Frame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(loginButton);
-        loginButton.setBounds(120, 630, 200, 53);
+        loginButton.setBounds(270, 610, 170, 90);
 
         backGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/BG.png"))); // NOI18N
         getContentPane().add(backGround);
@@ -66,27 +67,27 @@ public class Frame extends javax.swing.JFrame {
 
     private void loginButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseEntered
         // TODO add your handling code here:
-        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInHover.png")));
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin25.png")));
     }//GEN-LAST:event_loginButtonMouseEntered
 
     private void loginButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseExited
         // TODO add your handling code here:
-        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInButton.png")));
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin23.png")));
     }//GEN-LAST:event_loginButtonMouseExited
 
     private void loginButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMousePressed
         // TODO add your handling code here:
-        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInClick.png")));
+
     }//GEN-LAST:event_loginButtonMousePressed
 
     private void loginButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseReleased
         // TODO add your handling code here:
-        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signInButton.png")));
+
     }//GEN-LAST:event_loginButtonMouseReleased
 
     private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseClicked
         // TODO add your handling code here:
-        loginFrame loginFrame = new loginFrame();
+        SignInFrame loginFrame = new SignInFrame();
         loginFrame.setVisible(true);
     }//GEN-LAST:event_loginButtonMouseClicked
 
