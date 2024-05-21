@@ -36,7 +36,6 @@ public class Frame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Invoice Billing System");
         setMinimumSize(new java.awt.Dimension(720, 720));
-        setPreferredSize(new java.awt.Dimension(0, 0));
         setSize(720,720);
         getContentPane().setLayout(null);
 

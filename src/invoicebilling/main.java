@@ -19,6 +19,7 @@ public class main {
     public static void main(String[] args) {
             Frame Frame = new Frame();
             Frame.setVisible(true);
+            Frame.setLocationRelativeTo(null);
     }
     }
     
