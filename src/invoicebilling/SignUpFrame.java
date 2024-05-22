@@ -181,27 +181,20 @@ public class SignUpFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameTxtActionPerformed
 
-    private void passWordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passWordFieldFocusLost
+    private void passWordFieldFocusLost(java.awt.event.FocusEvent evt) {                                        
         // TODO add your handling code here:
-<<<<<<< Updated upstream
-        if (passWordField1.getText().isEmpty()){
-            passWordField1.setText("Password");
+        if (passWordField.getText().isEmpty()){
+            passWordField.setText("Password");
         }
-    }//GEN-LAST:event_passWordField1FocusLost
-=======
-    }//GEN-LAST:event_passWordFieldFocusLost
->>>>>>> Stashed changes
+    }                                        
+                                        
 
-    private void passWordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passWordFieldMouseClicked
+    private void passWordFieldMouseClicked(java.awt.event.MouseEvent evt) {                                           
         // TODO add your handling code here:
-<<<<<<< Updated upstream
-        if (passWordField1.getText().equals("Password")){
-            passWordField1.setText("");
+        if (passWordField.getText().equals("Password")){
+            passWordField.setText("");
         }
-    }//GEN-LAST:event_passWordField1MouseClicked
-=======
-    }//GEN-LAST:event_passWordFieldMouseClicked
->>>>>>> Stashed changes
+    }                                                                                 
 
     private void passWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordFieldActionPerformed
         // TODO add your handling code here:

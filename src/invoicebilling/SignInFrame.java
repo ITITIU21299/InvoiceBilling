@@ -28,6 +28,7 @@ public class SignInFrame extends javax.swing.JFrame {
 
         loginButton = new javax.swing.JLabel();
         signUpButton = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         userNameTxt = new javax.swing.JTextField();
         passWordField = new javax.swing.JPasswordField();
         background = new javax.swing.JLabel();
@@ -76,15 +77,12 @@ public class SignInFrame extends javax.swing.JFrame {
         getContentPane().add(signUpButton);
         signUpButton.setBounds(220, 530, 210, 90);
 
-<<<<<<< Updated upstream
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Don't have an account? Sign up now:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(120, 480, 470, 50);
 
-=======
->>>>>>> Stashed changes
         userNameTxt.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         userNameTxt.setForeground(new java.awt.Color(255, 255, 255));
         userNameTxt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -208,8 +206,6 @@ public class SignInFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         SignUpFrame signUpFrame = new SignUpFrame();
         signUpFrame.setVisible(true);
-        signUpFrame.setLocationRelativeTo(null);
-        this.dispose();
     }//GEN-LAST:event_signUpButtonMouseClicked
 
     private void loginButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseEntered
@@ -265,6 +261,7 @@ public class SignInFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel loginButton;
     private javax.swing.JPasswordField passWordField;
     private javax.swing.JLabel signUpButton;
