@@ -33,14 +33,27 @@ public class SignInFrame extends javax.swing.JFrame {
         passWordField = new javax.swing.JPasswordField();
         background = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SIGN IN");
         setMinimumSize(new java.awt.Dimension(640, 640));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         loginButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin23.png"))); // NOI18N
+        loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                loginButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                loginButtonMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                loginButtonMousePressed(evt);
+            }
+        });
         getContentPane().add(loginButton);
-        loginButton.setBounds(230, 390, 170, 90);
+        loginButton.setBounds(240, 390, 170, 90);
 
         signUpButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup23.png"))); // NOI18N
@@ -62,11 +75,13 @@ public class SignInFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(signUpButton);
-        signUpButton.setBounds(210, 530, 210, 90);
+        signUpButton.setBounds(220, 530, 210, 90);
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Don't have an account? Sign up now:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(140, 500, 37, 16);
+        jLabel1.setBounds(120, 480, 470, 50);
 
         userNameTxt.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         userNameTxt.setForeground(new java.awt.Color(255, 255, 255));
@@ -170,14 +185,17 @@ public class SignInFrame extends javax.swing.JFrame {
 
     private void signUpButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseEntered
         // TODO add your handling code here:
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup25.png")));
     }//GEN-LAST:event_signUpButtonMouseEntered
 
     private void signUpButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseExited
         // TODO add your handling code here:
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup23.png")));
     }//GEN-LAST:event_signUpButtonMouseExited
 
     private void signUpButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMousePressed
         // TODO add your handling code here:
+        signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup23.png")));
     }//GEN-LAST:event_signUpButtonMousePressed
 
     private void signUpButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseReleased
@@ -189,6 +207,21 @@ public class SignInFrame extends javax.swing.JFrame {
         SignUpFrame signUpFrame = new SignUpFrame();
         signUpFrame.setVisible(true);
     }//GEN-LAST:event_signUpButtonMouseClicked
+
+    private void loginButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseEntered
+        // TODO add your handling code here:
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin25.png")));
+    }//GEN-LAST:event_loginButtonMouseEntered
+
+    private void loginButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseExited
+        // TODO add your handling code here:
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin23.png")));
+    }//GEN-LAST:event_loginButtonMouseExited
+
+    private void loginButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMousePressed
+        // TODO add your handling code here:
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin23.png")));
+    }//GEN-LAST:event_loginButtonMousePressed
 
     /**
      * @param args the command line arguments

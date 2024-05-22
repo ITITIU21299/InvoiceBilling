@@ -32,7 +32,10 @@ public class SignUpFrame extends javax.swing.JFrame {
         passWordField1 = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SIGN UP");
+        setMinimumSize(new java.awt.Dimension(640, 640));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         signUpButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -180,10 +183,16 @@ public class SignUpFrame extends javax.swing.JFrame {
 
     private void passWordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passWordField1FocusLost
         // TODO add your handling code here:
+        if (passWordField1.getText().isEmpty()){
+            passWordField1.setText("Password");
+        }
     }//GEN-LAST:event_passWordField1FocusLost
 
     private void passWordField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passWordField1MouseClicked
         // TODO add your handling code here:
+        if (passWordField1.getText().equals("Password")){
+            passWordField1.setText("");
+        }
     }//GEN-LAST:event_passWordField1MouseClicked
 
     private void passWordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordField1ActionPerformed
