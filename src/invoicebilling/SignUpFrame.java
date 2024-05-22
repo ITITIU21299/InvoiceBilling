@@ -27,10 +27,10 @@ public class SignUpFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         signUpButton = new javax.swing.JLabel();
-        passWordField = new javax.swing.JPasswordField();
+        rePassWordField = new javax.swing.JPasswordField();
         userNameTxt = new javax.swing.JTextField();
-        passWordField1 = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        passWordField = new javax.swing.JPasswordField();
+        backGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SIGN UP");
@@ -57,29 +57,29 @@ public class SignUpFrame extends javax.swing.JFrame {
         getContentPane().add(signUpButton);
         signUpButton.setBounds(230, 510, 180, 80);
 
-        passWordField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        passWordField.setForeground(new java.awt.Color(255, 255, 255));
-        passWordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        passWordField.setText("Password");
-        passWordField.setBorder(null);
-        passWordField.setOpaque(false);
-        passWordField.addFocusListener(new java.awt.event.FocusAdapter() {
+        rePassWordField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        rePassWordField.setForeground(new java.awt.Color(255, 255, 255));
+        rePassWordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        rePassWordField.setText("Password");
+        rePassWordField.setBorder(null);
+        rePassWordField.setOpaque(false);
+        rePassWordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                passWordFieldFocusLost(evt);
+                rePassWordFieldFocusLost(evt);
             }
         });
-        passWordField.addMouseListener(new java.awt.event.MouseAdapter() {
+        rePassWordField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                passWordFieldMouseClicked(evt);
+                rePassWordFieldMouseClicked(evt);
             }
         });
-        passWordField.addActionListener(new java.awt.event.ActionListener() {
+        rePassWordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passWordFieldActionPerformed(evt);
+                rePassWordFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(passWordField);
-        passWordField.setBounds(110, 400, 410, 70);
+        getContentPane().add(rePassWordField);
+        rePassWordField.setBounds(110, 400, 410, 70);
 
         userNameTxt.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         userNameTxt.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,54 +110,54 @@ public class SignUpFrame extends javax.swing.JFrame {
         getContentPane().add(userNameTxt);
         userNameTxt.setBounds(110, 180, 410, 70);
 
-        passWordField1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        passWordField1.setForeground(new java.awt.Color(255, 255, 255));
-        passWordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        passWordField1.setText("Password");
-        passWordField1.setBorder(null);
-        passWordField1.setOpaque(false);
-        passWordField1.addFocusListener(new java.awt.event.FocusAdapter() {
+        passWordField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        passWordField.setForeground(new java.awt.Color(255, 255, 255));
+        passWordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        passWordField.setText("Password");
+        passWordField.setBorder(null);
+        passWordField.setOpaque(false);
+        passWordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                passWordField1FocusLost(evt);
+                passWordFieldFocusLost(evt);
             }
         });
-        passWordField1.addMouseListener(new java.awt.event.MouseAdapter() {
+        passWordField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                passWordField1MouseClicked(evt);
+                passWordFieldMouseClicked(evt);
             }
         });
-        passWordField1.addActionListener(new java.awt.event.ActionListener() {
+        passWordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passWordField1ActionPerformed(evt);
+                passWordFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(passWordField1);
-        passWordField1.setBounds(110, 290, 410, 70);
+        getContentPane().add(passWordField);
+        passWordField.setBounds(110, 290, 410, 70);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sign-up.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 710, 640);
+        backGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sign-up.png"))); // NOI18N
+        getContentPane().add(backGround);
+        backGround.setBounds(0, 0, 640, 640);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void passWordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passWordFieldFocusLost
+    private void rePassWordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_rePassWordFieldFocusLost
         // TODO add your handling code here:
-        if (passWordField.getText().isEmpty()){
-            passWordField.setText("Password");
+        if (rePassWordField.getText().isEmpty()){
+            rePassWordField.setText("Password");
         }
-    }//GEN-LAST:event_passWordFieldFocusLost
+    }//GEN-LAST:event_rePassWordFieldFocusLost
 
-    private void passWordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passWordFieldMouseClicked
+    private void rePassWordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rePassWordFieldMouseClicked
         // TODO add your handling code here:
-        if (passWordField.getText().equals("Password")){
-            passWordField.setText("");
+        if (rePassWordField.getText().equals("Password")){
+            rePassWordField.setText("");
         }
-    }//GEN-LAST:event_passWordFieldMouseClicked
+    }//GEN-LAST:event_rePassWordFieldMouseClicked
 
-    private void passWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordFieldActionPerformed
+    private void rePassWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rePassWordFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_passWordFieldActionPerformed
+    }//GEN-LAST:event_rePassWordFieldActionPerformed
 
     private void userNameTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTxtFocusGained
 
@@ -181,23 +181,31 @@ public class SignUpFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameTxtActionPerformed
 
-    private void passWordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passWordField1FocusLost
+    private void passWordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passWordFieldFocusLost
         // TODO add your handling code here:
+<<<<<<< Updated upstream
         if (passWordField1.getText().isEmpty()){
             passWordField1.setText("Password");
         }
     }//GEN-LAST:event_passWordField1FocusLost
+=======
+    }//GEN-LAST:event_passWordFieldFocusLost
+>>>>>>> Stashed changes
 
-    private void passWordField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passWordField1MouseClicked
+    private void passWordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passWordFieldMouseClicked
         // TODO add your handling code here:
+<<<<<<< Updated upstream
         if (passWordField1.getText().equals("Password")){
             passWordField1.setText("");
         }
     }//GEN-LAST:event_passWordField1MouseClicked
+=======
+    }//GEN-LAST:event_passWordFieldMouseClicked
+>>>>>>> Stashed changes
 
-    private void passWordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordField1ActionPerformed
+    private void passWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_passWordField1ActionPerformed
+    }//GEN-LAST:event_passWordFieldActionPerformed
 
     private void signUpButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseEntered
         // TODO add your handling code here:
@@ -255,9 +263,9 @@ public class SignUpFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel backGround;
     private javax.swing.JPasswordField passWordField;
-    private javax.swing.JPasswordField passWordField1;
+    private javax.swing.JPasswordField rePassWordField;
     private javax.swing.JLabel signUpButton;
     private javax.swing.JTextField userNameTxt;
     // End of variables declaration//GEN-END:variables
