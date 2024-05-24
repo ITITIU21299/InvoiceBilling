@@ -4,6 +4,16 @@
  */
 package invoicebilling;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+
 /**
  *
  * @author huynh
@@ -41,6 +51,9 @@ public class SignUpFrame extends javax.swing.JFrame {
         signUpButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup23.png"))); // NOI18N
         signUpButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signUpButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 signUpButtonMouseEntered(evt);
             }
@@ -220,6 +233,80 @@ public class SignUpFrame extends javax.swing.JFrame {
         signUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signup25.png")));
     }//GEN-LAST:event_signUpButtonMouseReleased
 
+    private void signUpButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseClicked
+        // TODO add your handling code here:
+        String username = userNameTxt.getText();
+        String password = new String(passWordField.getPassword());
+        String confirmPassword = new String(rePassWordField.getPassword());
+
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(this, "Passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (isUsernameExist(username)) {
+            JOptionPane.showMessageDialog(this, "Username already exists. Please choose a different username.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (insertUserData(username, password)) {
+            JOptionPane.showMessageDialog(this, "Signup successful!");
+
+            Timer timer = new Timer(500, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose();
+
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            new SignInFrame().setVisible(true);
+                        }
+                    });
+                }
+            });
+
+            timer.setRepeats(false);
+            timer.start();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error occurred while signing up.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_signUpButtonMouseClicked
+    
+    private boolean isUsernameExist(String username) {
+
+
+        try (Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
+            String sql = "SELECT * FROM users WHERE userID = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, username);
+
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    return resultSet.next(); // Returns true if the username already exists
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return true; // Assume an error occurred, and username is treated as already exist
+        }
+    }
+    
+    private boolean insertUserData(String username, String password) {
+
+
+        try (Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
+            String sql = "INSERT INTO users (userID, password) VALUES (?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, username);
+                statement.setString(2, password);
+                statement.executeUpdate();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     /**
      * @param args the command line arguments
      */
