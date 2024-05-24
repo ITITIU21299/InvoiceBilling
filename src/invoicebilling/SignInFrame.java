@@ -4,7 +4,6 @@
  */
 package invoicebilling;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -60,9 +59,6 @@ public class SignInFrame extends javax.swing.JFrame {
         loginButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin23.png"))); // NOI18N
         loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                loginButtonMouseClicked(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 loginButtonMouseClicked(evt);
             }
@@ -273,16 +269,12 @@ public class SignInFrame extends javax.swing.JFrame {
 
     private boolean isLoginValid(String username, String password) {
 
-        try (Connection connection = DriverManager.getConnection(main.jdbcUrl,main.dbUsername, main.dbPassword)) {
-            String sql = "SELECT * FROM users WHERE userID = ? AND password = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, username);
-                statement.setString(2, password);
+        try {
+            Connection con = Connection.getInstance();
+            ResultSet resultSet = con.sqlcode("SELECT * FROM users WHERE userID = '"+username+"' AND password = '"+password+"'");
 
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    return resultSet.next(); // Returns true if a matching user is found
-                }
-            }
+            return resultSet.next();
+
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error connecting to the database.", "Error", JOptionPane.ERROR_MESSAGE);
