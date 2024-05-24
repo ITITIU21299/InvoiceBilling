@@ -1,3 +1,4 @@
+package invoicebilling;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -11,8 +12,8 @@ public class CustomerGUI extends JFrame {
 
     public CustomerGUI() {
         setTitle("Buyers Details");
-        setSize(700, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(720, 720);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         initializeUI();
     }
@@ -76,10 +77,4 @@ public class CustomerGUI extends JFrame {
         table.setShowVerticalLines(false);
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            CustomerGUI gui = new CustomerGUI();
-            gui.setVisible(true);
-        });
-    }
 }

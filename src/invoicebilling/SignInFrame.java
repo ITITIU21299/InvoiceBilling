@@ -4,6 +4,15 @@
  */
 package invoicebilling;
 
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nguye
@@ -36,12 +45,17 @@ public class SignInFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SIGN IN");
         setMinimumSize(new java.awt.Dimension(640, 640));
+        setPreferredSize(new java.awt.Dimension(640, 680));
         setResizable(false);
+        setSize(new java.awt.Dimension(640, 1000));
         getContentPane().setLayout(null);
 
         loginButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin23.png"))); // NOI18N
         loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 loginButtonMouseEntered(evt);
             }
@@ -223,6 +237,28 @@ public class SignInFrame extends javax.swing.JFrame {
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin23.png")));
     }//GEN-LAST:event_loginButtonMousePressed
 
+    private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseClicked
+        new HomeFrame().setVisible(true);
+        this.dispose();
+        
+//        String username = userNameTxt.getText();
+//        String password = new String(passWordField.getPassword());
+//        if(!checkValidInput()){
+//            JOptionPane.showMessageDialog(this,"You need to enter all information!");
+//        }else{
+//            try {
+//                if (authenticateUser(username, password)) {
+//                    new HomeFrame().setVisible(true);
+//                    this.dispose();
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "Wrong username or password!");
+//                }
+//            } catch (SQLException ex) {
+//                Logger.getLogger(SignInFrame.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+    }//GEN-LAST:event_loginButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -257,6 +293,21 @@ public class SignInFrame extends javax.swing.JFrame {
                 new SignInFrame().setVisible(true);
             }
         });
+    }
+    private boolean authenticateUser(String username, String password) throws SQLException {
+        Connection con = Connection.getInstance();
+        ResultSet resultSet = con.sqlcode("Select * FROM authors WHERE firstName = 'Tem'");
+            if (resultSet.next()) {
+            con.close();
+            return true;
+            }
+        return false;
+    }
+    
+    public boolean checkValidInput(){
+        char[] passwordChars = passWordField.getPassword();
+        return !(userNameTxt.getText().equalsIgnoreCase("username")
+                || passwordChars.length == 0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

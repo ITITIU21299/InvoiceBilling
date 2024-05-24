@@ -90,6 +90,7 @@ public class Frame extends javax.swing.JFrame {
         SignInFrame loginFrame = new SignInFrame();
         loginFrame.setVisible(true);
         loginFrame.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_loginButtonMouseClicked
 
     /**
