@@ -4,6 +4,13 @@
  */
 package invoicebilling;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nguye
@@ -42,6 +49,9 @@ public class SignInFrame extends javax.swing.JFrame {
         loginButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin23.png"))); // NOI18N
         loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 loginButtonMouseEntered(evt);
             }
@@ -223,6 +233,48 @@ public class SignInFrame extends javax.swing.JFrame {
         loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signin23.png")));
     }//GEN-LAST:event_loginButtonMousePressed
 
+    private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseClicked
+        // TODO add your handling code here:
+        String enteredUsername = userNameTxt.getText();
+        String enteredPassword = new String(passWordField.getPassword());
+
+        // Check if the username and password are correct
+        if (isLoginValid(enteredUsername, enteredPassword)) {
+            JOptionPane.showMessageDialog(this, "Login successful!");
+
+            // Close the current LoginFrame
+            dispose();
+
+            // Open the MainFrame or whatever frame you want to show after login
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    //checking
+//                    new MainFrame(enteredUsername).setVisible(true);
+                }
+            });
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_loginButtonMouseClicked
+
+    private boolean isLoginValid(String username, String password) {
+
+        try (Connection connection = DriverManager.getConnection(main.jdbcUrl,main.dbUsername, main.dbPassword)) {
+            String sql = "SELECT * FROM users WHERE userID = ? AND password = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, username);
+                statement.setString(2, password);
+
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    return resultSet.next(); // Returns true if a matching user is found
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error connecting to the database.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
     /**
      * @param args the command line arguments
      */
