@@ -1,5 +1,12 @@
 package invoicebilling;
 
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -9,14 +16,23 @@ package invoicebilling;
  *
  * @author duong
  */
+
 public class HomeFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form HomeFrame
      */
-    public HomeFrame() {
+    private ShoppingCart cart;
+    private CartFrame cartFrame;
+    private CheckOutFrame checkOutFrame;
+    
+    public HomeFrame() {        
         initComponents();
-        this.setLocationRelativeTo(null);
+        this.setSize(763,845);
+        this.setLocationRelativeTo(null);        
+        cart = new ShoppingCart();  
+        cartFrame = new CartFrame();
+        checkOutFrame = new CheckOutFrame();
     }
 
     /**
@@ -28,6 +44,7 @@ public class HomeFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -63,6 +80,11 @@ public class HomeFrame extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(410, 730, 110, 60);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 0, 204));
@@ -139,9 +161,21 @@ public class HomeFrame extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 207, 815);
+        getContentPane().add(textField1);
+        textField1.setBounds(307, 69, 426, 22);
+
         jButton4.setText("Search");
         jButton4.setActionCommand("🔍Search ");
         jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(219, 69, 58, 22);
 
         jButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 51, 204));
@@ -152,6 +186,8 @@ public class HomeFrame extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton5);
+        jButton5.setBounds(219, 724, 182, 60);
 
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton6.setForeground(new java.awt.Color(0, 51, 204));
@@ -161,232 +197,185 @@ public class HomeFrame extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton6);
+        jButton6.setBounds(537, 726, 182, 57);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Invoice Information");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(219, 8, 518, 51);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Product's name:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(219, 188, 108, 20);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Price:");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(219, 226, 38, 20);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Supplier's Name:");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(219, 340, 114, 20);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Inventory's Quantity:");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(219, 378, 139, 20);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Stock Out Status:");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(219, 416, 113, 20);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("Null");
+        jLabel9.setPreferredSize(new java.awt.Dimension(250, 20));
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(339, 188, 250, 20);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Null");
+        jLabel11.setPreferredSize(new java.awt.Dimension(250, 20));
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(269, 226, 250, 20);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setText("Null");
+        jLabel12.setPreferredSize(new java.awt.Dimension(250, 20));
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(345, 340, 250, 20);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Null");
+        jLabel13.setPreferredSize(new java.awt.Dimension(250, 20));
+        getContentPane().add(jLabel13);
+        jLabel13.setBounds(370, 378, 250, 20);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel14.setText("Null");
+        jLabel14.setPreferredSize(new java.awt.Dimension(250, 20));
+        getContentPane().add(jLabel14);
+        jLabel14.setBounds(344, 416, 250, 20);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("Activate:");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(219, 264, 59, 20);
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setText("Null");
+        jLabel15.setPreferredSize(new java.awt.Dimension(250, 20));
+        getContentPane().add(jLabel15);
+        jLabel15.setBounds(290, 264, 250, 20);
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel16.setText("Category:");
+        getContentPane().add(jLabel16);
+        jLabel16.setBounds(219, 302, 66, 20);
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel17.setText("Null");
+        jLabel17.setPreferredSize(new java.awt.Dimension(250, 20));
+        getContentPane().add(jLabel17);
+        jLabel17.setBounds(297, 302, 250, 20);
 
         jButton7.setText("Clear");
         jButton7.setActionCommand("🔍Search ");
         jButton7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7);
+        jButton7.setBounds(219, 101, 58, 22);
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel18.setText("Null");
+        jLabel18.setPreferredSize(new java.awt.Dimension(250, 20));
+        getContentPane().add(jLabel18);
+        jLabel18.setBounds(364, 454, 250, 20);
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel19.setText("Warehouse's Name:");
+        getContentPane().add(jLabel19);
+        jLabel19.setBounds(219, 454, 133, 20);
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel20.setText("Warehouse's Location:");
+        getContentPane().add(jLabel20);
+        jLabel20.setBounds(219, 492, 150, 20);
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel21.setText("Null");
+        jLabel21.setPreferredSize(new java.awt.Dimension(250, 20));
+        getContentPane().add(jLabel21);
+        jLabel21.setBounds(381, 492, 250, 20);
 
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel22.setText("Shipment's Carrier:");
+        getContentPane().add(jLabel22);
+        jLabel22.setBounds(219, 530, 128, 20);
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel23.setText("Null");
+        jLabel23.setPreferredSize(new java.awt.Dimension(250, 20));
+        getContentPane().add(jLabel23);
+        jLabel23.setBounds(359, 530, 250, 20);
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel24.setText("Shipment's Date:");
+        getContentPane().add(jLabel24);
+        jLabel24.setBounds(219, 568, 112, 20);
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel25.setText("Null");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel13))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel14))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel12))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel9))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel11))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel15))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel17))
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel18))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel21))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel23))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel25)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel15))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel12))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel13))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel14))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel18))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel21))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(jLabel23))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel25))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
-                .addGap(31, 31, 31))
-        );
+        jLabel25.setPreferredSize(new java.awt.Dimension(250, 20));
+        getContentPane().add(jLabel25);
+        jLabel25.setBounds(343, 568, 250, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+
+        // cart = ShoppingCart.getInstance();        
+        if (jLabel9.getText().equals("Null")) 
+        {   
+            JOptionPane.showMessageDialog(this, "Please search an item", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String[] data = {jLabel9.getText(), "1", jLabel11.getText()};
+        int check = cart.addLast(textField1.getText(), jLabel9.getText(), 1 , jLabel11.getText());
+        
+        if(check != 0) {
+            cartFrame.increase(check);
+        } else {
+            cartFrame.update(data);
+        }
+        JOptionPane.showMessageDialog(this, "Add item successfully", "Done", JOptionPane.INFORMATION_MESSAGE);
+        cartFrame.setCart(cart);        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        new CheckOutFrame().setVisible(true);
-        this.dispose();
+        checkOutFrame = new CheckOutFrame();
+        checkOutFrame.setVisible(true);
+        checkOutFrame.display(cartFrame.getTable());
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new CartFrame().setVisible(true);
+        cartFrame.setVisible(true);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -400,6 +389,57 @@ public class HomeFrame extends javax.swing.JFrame {
         new CustomerGUI().setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:        
+        try (java.sql.Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
+                String sql = "Select P.Name, P.price, P.activate, P.category, Su.name, I.quantity, I.stock_out_status, W.WareHouse_name,  W.Location, Sh.carrier_name, Sh.shipment_date \n" +
+                    "From Products P, suppliers Su, inventory I, WAREHOUSE W, shipment Sh, warehouse_shipment WS \n" +
+                    "Where Su.supplierID = P.supplierID \n" +
+                    "And I.product_id = P.productID \n" +
+                    "And W.WareHouse_ID = I.warehouse_id \n" +
+                    "And WS.warehouse_id = W.WareHouse_ID \n" +
+                    "And Sh.shipment_id = WS.shipment_id \n" +
+                    "And P.productID = " + textField1.getText();            
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {                                        
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        jLabel9.setText(resultSet.getString("Name"));
+                        jLabel11.setText(resultSet.getString("price"));
+                        jLabel15.setText(resultSet.getString("activate"));
+                        jLabel17.setText(resultSet.getString("category"));
+                        jLabel12.setText(resultSet.getString("name"));
+                        jLabel13.setText(resultSet.getString("quantity"));
+                        jLabel14.setText(resultSet.getString("stock_out_status"));
+                        jLabel18.setText(resultSet.getString("WareHouse_name"));
+                        jLabel21.setText(resultSet.getString("Location"));
+                        jLabel23.setText(resultSet.getString("carrier_name"));
+                        jLabel25.setText(resultSet.getString("shipment_date"));                                                
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        jLabel9.setText("Null");
+        jLabel11.setText("Null");
+        jLabel15.setText("Null");
+        jLabel17.setText("Null");
+        jLabel12.setText("Null");
+        jLabel13.setText("Null");
+        jLabel14.setText("Null");
+        jLabel18.setText("Null");
+        jLabel21.setText("Null");
+        jLabel23.setText("Null");
+        jLabel25.setText("Null");   
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    public ShoppingCart getCart() {
+        return cart;
+    }
     /**
      * @param args the command line arguments
      */
@@ -462,6 +502,7 @@ public class HomeFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

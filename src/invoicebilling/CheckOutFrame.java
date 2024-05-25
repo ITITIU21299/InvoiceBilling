@@ -4,6 +4,12 @@
  */
 package invoicebilling;
 
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Anh Huy
@@ -13,8 +19,11 @@ public class CheckOutFrame extends javax.swing.JFrame {
     /**
      * Creates new form CheckOutFrame
      */
+    ShoppingCart cart;
+    
     public CheckOutFrame() {
-        initComponents();
+        //this.setLocationRelativeTo(null);        
+        initComponents();        
     }
 
     /**
@@ -49,7 +58,7 @@ public class CheckOutFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -161,7 +170,7 @@ public class CheckOutFrame extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(218, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+
             },
             new String [] {
                 "Product Name", "Amount", "Price"
@@ -277,6 +286,11 @@ public class CheckOutFrame extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Finish", "Done", JOptionPane.INFORMATION_MESSAGE);        
+        //new HomeFrame().setVisible(true);
+        this.dispose();        
+        insertCustomer();
+        insertInvoice();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -289,7 +303,67 @@ public class CheckOutFrame extends javax.swing.JFrame {
         new HomeFrame().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
+    public void display(String[][] st) {
+        DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+        
+        for (int i=0; i<st.length;i++) {    
+            System.out.println(i);
+            if (st[i][0] == null) return;
+                tblModel.addRow(st[i]); 
+        }
+    }
+    
+    public void insertCustomer() {
+        //INSERT INTO CUSTOMER VALUES ('3', 'Tom B. Erichsen', 'Skagen@123', 123456);
+        
+        
+        
+        try (java.sql.Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
+            // SELECT MAX(invoice_id) From invoices;
+            String sql = "SELECT MAX(invoice_id) From invoices;";
+            
+            String sql2 = "INSERT INTO CUSTOMER VALUES (?, ?, ?, ?)";
+            
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, Integer.valueOf(textField1.getText()));
+                statement.setString(2, textField2.getText());
+                statement.setString(3, textField3.getText());
+                statement.setString(4, textField4.getText());  
+                statement.executeUpdate();                
+            }
+            
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, Integer.valueOf(textField1.getText()));
+                statement.setString(2, textField2.getText());
+                statement.setString(3, textField3.getText());
+                statement.setString(4, textField4.getText());  
+                statement.executeUpdate();                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }        
+    }
+    
+    private void insertInvoice() {
+        // INSERT INTO invoices VALUES (10, 'PAID', 2024-05-24, 100.10, 'cash', 3);        
+        try (java.sql.Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
+            String sql = "INSERT INTO invoices VALUES (?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, Integer.valueOf(textField1.getText()));
+                statement.setString(2, textField2.getText());
+                statement.setString(3, textField3.getText());
+                statement.setString(4, textField4.getText());  
+                
+                statement.executeUpdate();
+                return;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }    
+    }    
     /**
      * @param args the command line arguments
      */
@@ -320,7 +394,7 @@ public class CheckOutFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CheckOutFrame().setVisible(true);
+                //new CheckOutFrame().setVisible(true);
             }
         });
     }
@@ -349,4 +423,6 @@ public class CheckOutFrame extends javax.swing.JFrame {
     private java.awt.TextField textField3;
     private java.awt.TextField textField4;
     // End of variables declaration//GEN-END:variables
+
+ 
 }

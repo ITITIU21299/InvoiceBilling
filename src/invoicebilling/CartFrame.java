@@ -4,20 +4,29 @@
  */
 package invoicebilling;
 
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author duong
  */
 public class CartFrame extends javax.swing.JFrame {
 
+    private ShoppingCart cart;
     /**
      * Creates new form CartFrame
      */
     public CartFrame() {
         initComponents();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);        
     }
 
+    public void setCart(ShoppingCart cart) {
+        this.cart = cart;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,7 +50,7 @@ public class CartFrame extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(218, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+
             },
             new String [] {
                 "Product Name", "Amount", "Price"
@@ -67,6 +76,11 @@ public class CartFrame extends javax.swing.JFrame {
         });
 
         jButton7.setText("Clear");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         label1.setAlignment(java.awt.Label.CENTER);
         label1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -118,9 +132,52 @@ public class CartFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
+        DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+        
+        cart.delete(tblModel.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        
+        if (jTable1.getSelectedRowCount() == 1) {
+            tblModel.removeRow(jTable1.getSelectedRow());
+        } else
+            JOptionPane.showMessageDialog(this, "Please select an item to delete", "Error", JOptionPane.ERROR_MESSAGE);
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        cart.delete();
+        DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+        tblModel.setRowCount(0);
+    }//GEN-LAST:event_jButton7ActionPerformed
+    
+    public void update(String[] data) {
+        DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();        
+        tblModel.addRow(data);
+    }
+
+    public void increase(int row) {
+        System.out.println(row);
+        DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+        int newQuanity = Integer.valueOf(tblModel.getValueAt(row-1, 1).toString());
+        tblModel.setValueAt(newQuanity+1, row-1, 1);
+        
+
+    }    
+    
+    public String[][] getTable() {
+        DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+        
+        String[][] st = new String[10000][3];
+        for (int i=0; i<jTable1.getRowCount();i++){
+            st[i][0] = tblModel.getValueAt(i,0).toString();
+            st[i][1] = tblModel.getValueAt(i,1).toString();
+            st[i][2] = tblModel.getValueAt(i,2).toString();            
+        }
+        return st;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -151,7 +208,7 @@ public class CartFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CartFrame().setVisible(true);
+                //new CartFrame().setVisible(true);
             }
         });
     }

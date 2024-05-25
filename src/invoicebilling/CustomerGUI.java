@@ -4,6 +4,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CustomerGUI extends JFrame {
     private JTable table;
@@ -16,6 +20,7 @@ public class CustomerGUI extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         initializeUI();
+        display();
     }
 
     private void initializeUI() {
@@ -76,5 +81,24 @@ public class CustomerGUI extends JFrame {
         table.setGridColor(new Color(233, 233, 233));
         table.setShowVerticalLines(false);
     }
-
+    
+    public void display(){
+        DefaultTableModel tblModel = (DefaultTableModel) table.getModel();            
+        try (java.sql.Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
+                String sql = "Select * from customer";     
+                try (PreparedStatement statement = connection.prepareStatement(sql)) {                                        
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        while (resultSet.next()) {  
+                            String customerID = resultSet.getString("customerID");
+                            String name = resultSet.getString("Name");
+                            String email = resultSet.getString("Email");
+                            String phone = resultSet.getString("PhoneNumber");
+                            tblModel.addRow(new Object[]{customerID, name, email, phone});
+                        }                        
+                    }
+                }            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
