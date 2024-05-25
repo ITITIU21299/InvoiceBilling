@@ -241,7 +241,7 @@ public class SignInFrame extends javax.swing.JFrame {
 
         // Check if the username and password are correct
         if (isLoginValid(enteredUsername, enteredPassword)) {
-            JOptionPane.showMessageDialog(this, "Login successful!");
+            //JOptionPane.showMessageDialog(this, "Login successful!");
 
             // Close the current LoginFrame
             dispose();
@@ -249,8 +249,9 @@ public class SignInFrame extends javax.swing.JFrame {
             // Open the MainFrame or whatever frame you want to show after login
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    //checking
-//                    new MainFrame(enteredUsername).setVisible(true);
+                    HomeFrame hf = new HomeFrame();
+                    hf.setVisible(true);
+                    
                 }
             });
         } else {
@@ -261,7 +262,7 @@ public class SignInFrame extends javax.swing.JFrame {
     private boolean isLoginValid(String username, String password) {
 
         try (Connection connection = DriverManager.getConnection(main.jdbcUrl,main.dbUsername, main.dbPassword)) {
-            String sql = "SELECT * FROM users WHERE userID = ? AND password = ?";
+            String sql = "SELECT * FROM users WHERE username = ? AND password_hash = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
                 statement.setString(2, password);

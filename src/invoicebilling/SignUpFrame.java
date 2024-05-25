@@ -277,7 +277,7 @@ public class SignUpFrame extends javax.swing.JFrame {
 
 
         try (Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
-            String sql = "SELECT * FROM users WHERE userID = ?";
+            String sql = "SELECT * FROM users WHERE username = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
 
@@ -296,7 +296,7 @@ public class SignUpFrame extends javax.swing.JFrame {
 
 
         try (Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
-            String sql = "INSERT INTO users (userID, password) VALUES (?, ?)";
+            String sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
                 statement.setString(2, password);
