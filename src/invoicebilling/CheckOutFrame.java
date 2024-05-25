@@ -355,19 +355,16 @@ public class CheckOutFrame extends javax.swing.JFrame {
 
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
-                    if (resultSet.next()){
-                        return;
-                    }
-                    else{
-                        try (PreparedStatement statement2 = connection.prepareStatement(sql2)) {
-                            statement2.setInt(1, Integer.parseInt(textField1.getText()));
-                            statement2.setString(2, textField2.getText());
-                            statement2.setString(3, textField3.getText());
-                            statement2.setString(4, textField4.getText());  
-                            statement2.executeUpdate();                
-                        }
-                    }
-                        
+                    if (!resultSet.next()){
+                        if(resultSet.getString("customerID") != null)
+                            try (PreparedStatement statement2 = connection.prepareStatement(sql2)) {
+                                statement2.setInt(1, Integer.parseInt(textField1.getText()));
+                                statement2.setString(2, textField2.getText());
+                                statement2.setString(3, textField3.getText());
+                                statement2.setString(4, textField4.getText());  
+                                statement2.executeUpdate();                
+                            }
+                    }    
                 }                
             }
             
