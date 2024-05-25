@@ -34,11 +34,11 @@ class Node {
     public String id;
     public String name;
     public int ammount;        
-    public String price;
+    public double price;
     public Node next;
     //public Node prev;
     
-    public Node(String id, String name, int ammount, String price) {
+    public Node(String id, String name, int ammount, double price) {
         this.id = id;
         this.name = name;
         this.ammount = ammount;        
@@ -64,7 +64,18 @@ public class ShoppingCart {
         last.next = null;
     }
     
-    public int addLast (String id, String name, int ammount, String price) {
+    public double total(){
+        if (first == null) return 0.0;
+        Node current = first;
+        double total = 0.0;
+        while (current != null){
+            total += current.ammount*current.price;
+            current = current.next;
+        }
+        return total;
+    }
+    
+    public int addLast (String id, String name, int ammount, double price) {
         Node n = new Node(id, name, ammount, price);
         
         int check = existed(id);
@@ -90,7 +101,7 @@ public class ShoppingCart {
     public void delete(String key) {
         if (first == null) return;
         Node current = first;
-        Node prev = new Node("0", "0", 0, "0");
+        Node prev = new Node("0", "0", 0, 0);
         while (current != null) {            
             if (current.id.equals(key)) {
                 if (current == first) {

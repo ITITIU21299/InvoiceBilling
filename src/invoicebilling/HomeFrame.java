@@ -25,6 +25,7 @@ public class HomeFrame extends javax.swing.JFrame {
     private ShoppingCart cart;
     private CartFrame cartFrame;
     private CheckOutFrame checkOutFrame;
+    private double price;
     
     public HomeFrame() {        
         initComponents();
@@ -354,7 +355,7 @@ public class HomeFrame extends javax.swing.JFrame {
         }
 
         String[] data = {jLabel9.getText(), "1", jLabel11.getText()};
-        int check = cart.addLast(textField1.getText(), jLabel9.getText(), 1 , jLabel11.getText());
+        int check = cart.addLast(textField1.getText(), jLabel9.getText(), 1 , price);
         
         if(check != 0) {
             cartFrame.increase(check);
@@ -369,7 +370,7 @@ public class HomeFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         checkOutFrame = new CheckOutFrame();
         checkOutFrame.setVisible(true);
-        checkOutFrame.display(cartFrame.getTable());
+        checkOutFrame.display(cartFrame, cartFrame.getTable(), cart);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -392,19 +393,18 @@ public class HomeFrame extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:        
         try (java.sql.Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
-                String sql = "Select P.Name, P.price, P.activate, P.category, Su.name, I.quantity, I.stock_out_status, W.WareHouse_name,  W.Location, Sh.carrier_name, Sh.shipment_date \n" +
-                    "From Products P, suppliers Su, inventory I, WAREHOUSE W, shipment Sh, warehouse_shipment WS \n" +
-                    "Where Su.supplierID = P.supplierID \n" +
-                    "And I.product_id = P.productID \n" +
-                    "And W.WareHouse_ID = I.warehouse_id \n" +
-                    "And WS.warehouse_id = W.WareHouse_ID \n" +
-                    "And Sh.shipment_id = WS.shipment_id \n" +
-                    "And P.productID = " + textField1.getText();            
+                String sql = "Select P.Name, P.price, P.activate, P.category, Su.name, I.quantity, I.stock_out_status, W.WareHouse_name,  W.Location, Sh.carrier_name, Sh.shipment_date\n" +
+"From Products as P, suppliers as Su, inventory as I, WAREHOUSE as W, shipment as Sh\n" +
+"Where Su.supplierID = P.supplierID\n" +
+"And I.product_id = P.productID\n" +
+"And W.WareHouse_ID = I.warehouse_id\n" +
+"And Sh.warehouse_id = W.WareHouse_ID\n" +
+"And P.productID = "+ textField1.getText();            
             try (PreparedStatement statement = connection.prepareStatement(sql)) {                                        
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
                         jLabel9.setText(resultSet.getString("Name"));
-                        jLabel11.setText(resultSet.getString("price"));
+                        jLabel11.setText(String.valueOf(resultSet.getDouble("price")));
                         jLabel15.setText(resultSet.getString("activate"));
                         jLabel17.setText(resultSet.getString("category"));
                         jLabel12.setText(resultSet.getString("name"));
@@ -413,7 +413,8 @@ public class HomeFrame extends javax.swing.JFrame {
                         jLabel18.setText(resultSet.getString("WareHouse_name"));
                         jLabel21.setText(resultSet.getString("Location"));
                         jLabel23.setText(resultSet.getString("carrier_name"));
-                        jLabel25.setText(resultSet.getString("shipment_date"));                                                
+                        jLabel25.setText(resultSet.getString("shipment_date"));
+                        price = resultSet.getDouble("price");
                     }
                 }
             }

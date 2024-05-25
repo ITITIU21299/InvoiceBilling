@@ -178,6 +178,17 @@ public class CartFrame extends javax.swing.JFrame {
         return st;
     }
     
+    public void clearTable(){
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Product Name", "Amount", "Price"
+            }
+        ));
+    }
+    
     /**
      * @param args the command line arguments
      */

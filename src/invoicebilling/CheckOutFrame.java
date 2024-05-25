@@ -6,9 +6,11 @@ package invoicebilling;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
 
 /**
  *
@@ -19,11 +21,22 @@ public class CheckOutFrame extends javax.swing.JFrame {
     /**
      * Creates new form CheckOutFrame
      */
-    ShoppingCart cart;
+//    public ShoppingCart cart;
+    public Double totalPrice = 0.0;
+    public String date;
+    public String customerid;
+    public ShoppingCart cart;
+    public CartFrame cartFrame;
     
     public CheckOutFrame() {
         //this.setLocationRelativeTo(null);        
-        initComponents();        
+        initComponents();
+        LocalDate currentDate = LocalDate.now();
+        int year = currentDate.getYear();
+        int month = currentDate.getMonthValue();
+        int day = currentDate.getDayOfMonth();
+        date = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
+        jLabel29.setText(date);
     }
 
     /**
@@ -164,7 +177,7 @@ public class CheckOutFrame extends javax.swing.JFrame {
         jLabel30.setText("Payment:");
 
         jLabel31.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel31.setText("525080238592385");
+        jLabel31.setText("By cash");
         jLabel31.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jTable1.setBackground(new java.awt.Color(218, 255, 255));
@@ -291,6 +304,16 @@ public class CheckOutFrame extends javax.swing.JFrame {
         this.dispose();        
         insertCustomer();
         insertInvoice();
+        cart.delete();
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Product Name", "Amount", "Price"
+            }
+        ));
+        cartFrame.clearTable();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -304,13 +327,18 @@ public class CheckOutFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
     
-    public void display(String[][] st) {
+    public void display(CartFrame cartFrame, String[][] st, ShoppingCart cart) {
         DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+        jLabel11.setText(String.valueOf(cart.total()));
+        this.cartFrame = cartFrame;
+        this.cart = cart;
+        totalPrice = cart.total();
         
         for (int i=0; i<st.length;i++) {    
             System.out.println(i);
-            if (st[i][0] == null) return;
-                tblModel.addRow(st[i]); 
+            if (st[i][0] == null) 
+                return;
+            tblModel.addRow(st[i]);
         }
     }
     
@@ -318,28 +346,32 @@ public class CheckOutFrame extends javax.swing.JFrame {
         //INSERT INTO CUSTOMER VALUES ('3', 'Tom B. Erichsen', 'Skagen@123', 123456);
         
         
-        
         try (java.sql.Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
             // SELECT MAX(invoice_id) From invoices;
-            String sql = "SELECT MAX(invoice_id) From invoices;";
+            customerid = textField1.getText();
+            String sql = "SELECT * From CUSTOMER Where customerID = "+customerid;
             
             String sql2 = "INSERT INTO CUSTOMER VALUES (?, ?, ?, ?)";
-            
+
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, Integer.valueOf(textField1.getText()));
-                statement.setString(2, textField2.getText());
-                statement.setString(3, textField3.getText());
-                statement.setString(4, textField4.getText());  
-                statement.executeUpdate();                
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()){
+                        return;
+                    }
+                    else{
+                        try (PreparedStatement statement2 = connection.prepareStatement(sql2)) {
+                            statement2.setInt(1, Integer.parseInt(textField1.getText()));
+                            statement2.setString(2, textField2.getText());
+                            statement2.setString(3, textField3.getText());
+                            statement2.setString(4, textField4.getText());  
+                            statement2.executeUpdate();                
+                        }
+                    }
+                        
+                }                
             }
             
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, Integer.valueOf(textField1.getText()));
-                statement.setString(2, textField2.getText());
-                statement.setString(3, textField3.getText());
-                statement.setString(4, textField4.getText());  
-                statement.executeUpdate();                
-            }
+
         } catch (SQLException e) {
             e.printStackTrace();
             return;
@@ -349,12 +381,24 @@ public class CheckOutFrame extends javax.swing.JFrame {
     private void insertInvoice() {
         // INSERT INTO invoices VALUES (10, 'PAID', 2024-05-24, 100.10, 'cash', 3);        
         try (java.sql.Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
-            String sql = "INSERT INTO invoices VALUES (?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, Integer.valueOf(textField1.getText()));
-                statement.setString(2, textField2.getText());
-                statement.setString(3, textField3.getText());
-                statement.setString(4, textField4.getText());  
+            String sql1 = "SELECT MAX(invoice_id) as id From invoices;";
+            String sql2 = "INSERT INTO invoices VALUES (?, ?, ?, ?, ?, ?)";
+            int id = 100;
+            try (PreparedStatement statement = connection.prepareStatement(sql1)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()){
+                        id = resultSet.getInt("id")+1;
+                    }
+                }
+            }
+            
+            try (PreparedStatement statement = connection.prepareStatement(sql2)) {
+                statement.setInt(1, id);
+                statement.setString(2, "UNPAID");
+                statement.setString(3, date);
+                statement.setString(4, String.valueOf(totalPrice));
+                statement.setString(5, "cash");
+                statement.setString(6, customerid); 
                 
                 statement.executeUpdate();
                 return;
