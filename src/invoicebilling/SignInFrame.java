@@ -216,6 +216,7 @@ public class SignInFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         SignUpFrame signUpFrame = new SignUpFrame();
         signUpFrame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_signUpButtonMouseClicked
 
     private void loginButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseEntered
