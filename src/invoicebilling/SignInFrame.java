@@ -4,19 +4,11 @@
  */
 package invoicebilling;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
-
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,9 +43,7 @@ public class SignInFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SIGN IN");
         setMinimumSize(new java.awt.Dimension(640, 640));
-        setPreferredSize(new java.awt.Dimension(640, 680));
         setResizable(false);
-        setSize(new java.awt.Dimension(640, 1000));
         getContentPane().setLayout(null);
 
         loginButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -250,7 +240,7 @@ public class SignInFrame extends javax.swing.JFrame {
 
         // Check if the username and password are correct
         if (isLoginValid(enteredUsername, enteredPassword)) {
-            JOptionPane.showMessageDialog(this, "Login successful!");
+            //JOptionPane.showMessageDialog(this, "Login successful!");
 
             // Close the current LoginFrame
             dispose();
@@ -258,8 +248,9 @@ public class SignInFrame extends javax.swing.JFrame {
             // Open the MainFrame or whatever frame you want to show after login
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    //checking
-//                    new MainFrame(enteredUsername).setVisible(true);
+                    HomeFrame hf = new HomeFrame();
+                    hf.setVisible(true);
+                    
                 }
             });
         } else {
@@ -269,12 +260,16 @@ public class SignInFrame extends javax.swing.JFrame {
 
     private boolean isLoginValid(String username, String password) {
 
-        try {
-            Connection con = Connection.getInstance();
-            ResultSet resultSet = con.sqlcode("SELECT * FROM users WHERE userID = '"+username+"' AND password = '"+password+"'");
+        try (Connection connection = DriverManager.getConnection(main.jdbcUrl,main.dbUsername, main.dbPassword)) {
+            String sql = "SELECT * FROM users WHERE username = ? AND password_hash = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, username);
+                statement.setString(2, password);
 
-            return resultSet.next();
-
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    return resultSet.next(); // Returns true if a matching user is found
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error connecting to the database.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -315,21 +310,6 @@ public class SignInFrame extends javax.swing.JFrame {
                 new SignInFrame().setVisible(true);
             }
         });
-    }
-    private boolean authenticateUser(String username, String password) throws SQLException {
-        Connection con = Connection.getInstance();
-        ResultSet resultSet = con.sqlcode("Select * FROM authors WHERE firstName = 'Tem'");
-            if (resultSet.next()) {
-            con.close();
-            return true;
-            }
-        return false;
-    }
-    
-    public boolean checkValidInput(){
-        char[] passwordChars = passWordField.getPassword();
-        return !(userNameTxt.getText().equalsIgnoreCase("username")
-                || passwordChars.length == 0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
