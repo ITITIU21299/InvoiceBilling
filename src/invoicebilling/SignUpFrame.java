@@ -152,6 +152,7 @@ public class SignUpFrame extends javax.swing.JFrame {
         backGround.setBounds(0, 0, 640, 640);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void rePassWordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_rePassWordFieldFocusLost
