@@ -15,7 +15,7 @@ import java.sql.Statement;
  */
 public class Connection {
     private static Connection instance;
-    private static final String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=INVOICEBILLING;user=sa;password=huy";
+    private static final String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=MOONHOUSE;user=sa;password=123456";
     private static java.sql.Connection con = null;
     private static Statement stmt = null;
 //                String SQL = "Select * FROM Customer";

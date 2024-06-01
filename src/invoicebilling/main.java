@@ -17,10 +17,10 @@ public class main {
     /**
      * @param args the command line arguments
      */static String dbUsername = "sa";
-        static String dbPassword = "huy";
+        static String dbPassword = "123456";
 
         //static String jdbcUrl = "jdbc:sqlserver://sql.bsite.net\\MSSQL2016;databaseName=...;user=...;password=...;encrypt=true;trustServerCertificate=true;";
-    public static String jdbcUrl = "jdbc:sqlserver://localhost:1433;databaseName=INVOICEBILLING;user=sa;password=huy";
+    public static String jdbcUrl = "jdbc:sqlserver://localhost:1433;databaseName=MOONHOUSE;user=sa;password=123456";
 
 
     public static void main(String[] args) throws SQLException {
@@ -29,7 +29,7 @@ public class main {
         Connection conn = null;
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String url = "jdbc:sqlserver://localhost:1433;databaseName=INVOICEBILLING;user=sa;password=huy";
+                String url = "jdbc:sqlserver://localhost:1433;databaseName=MOONHOUSE;user=sa;password=123456";
                 conn = DriverManager.getConnection(url);
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();

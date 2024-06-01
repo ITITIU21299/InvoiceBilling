@@ -4,6 +4,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -56,6 +58,12 @@ public class CustomerGUI extends JFrame {
         styleTable();
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
+         table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
     }
 
     private void addCustomer() {
@@ -101,4 +109,11 @@ public class CustomerGUI extends JFrame {
             e.printStackTrace();
         }
     }
+         private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {                                     
+         DefaultTableModel model = (DefaultTableModel) table.getModel();
+         int row=  table.getSelectedRow();
+         String name=(String) model.getValueAt(row,1);
+         invoicesOfCustomer invoice=new invoicesOfCustomer(name);
+         invoice.setVisible(true);
+    }    
 }
