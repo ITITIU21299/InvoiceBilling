@@ -114,7 +114,7 @@ String name;
                 PreparedStatement pstmt=null;
                java.sql.Connection conn=null;
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String url = "jdbc:sqlserver://localhost:1433;databaseName=MOONHOUSE;user=sa;password=123456;encrypt=true;trustServerCertificate=true";
+                String url = "jdbc:sqlserver://localhost:1433;databaseName=INVOICEBILLING;user=sa;password=huy;encrypt=true;trustServerCertificate=true";
                 conn = DriverManager.getConnection(url);
               
                 String sql = "SELECT invoice_id, status, Date, Total_Price, payment " +
