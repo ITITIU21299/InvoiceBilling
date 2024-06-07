@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -190,7 +191,7 @@ public class CheckOutFrame extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -298,24 +299,102 @@ public class CheckOutFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Finish", "Done", JOptionPane.INFORMATION_MESSAGE);        
-        //new HomeFrame().setVisible(true);
-        this.dispose();        
-        insertCustomer();
-        insertInvoice();
-        cart.delete();
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        
+   int id=generateInvoiceId();
 
-            },
-            new String [] {
-                "Product Name", "Amount", "Price"
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    insertCustomer();  
+     insertInvoice(); 
+
+    try (java.sql.Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
+        String insertQuery = "INSERT INTO product_in_invoice(product_id, amount, invoice_id) VALUES (?, ?, ?)";
+        PreparedStatement insertStmt = connection.prepareStatement(insertQuery);
+        PreparedStatement findStmt = connection.prepareStatement("SELECT productID FROM Products WHERE Name = ?");
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String productName = (String) model.getValueAt(i, 0);
+            findStmt.setString(1, productName);
+            ResultSet rs = findStmt.executeQuery();
+
+            if (rs.next()) {
+                int productID = rs.getInt("productID");
+                int amount;
+
+                // Lấy giá trị từ cột Amount và chuyển đổi sang Integer
+                Object amountValue = model.getValueAt(i, 1); // Cột Amount
+
+                if (amountValue instanceof Integer) {
+                    amount = (Integer) amountValue;
+                } else {
+                    try {
+                        amount = Integer.parseInt(amountValue.toString());
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Invalid amount value: " + amountValue);
+                        continue;
+                    }
+                }
+
+                insertStmt.setInt(1, productID);
+                insertStmt.setInt(2, amount);
+                insertStmt.setInt(3, id);
+                insertStmt.executeUpdate();
+            } else {
+                JOptionPane.showMessageDialog(null, "CAN'T FIND THE PRODUCT");
             }
-        ));
-        cartFrame.clearTable();
-    }//GEN-LAST:event_jButton6ActionPerformed
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
 
+    JOptionPane.showMessageDialog(this, "Finish", "Done", JOptionPane.INFORMATION_MESSAGE);
+    this.dispose();
+    
+    cart.delete();
+    clearTable();
+    cartFrame.clearTable();
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+private int generateInvoiceId() {
+    String query = "SELECT invoice_id FROM invoices";
+    int id = 0;
+
+    try (java.sql.Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword);
+         java.sql.Statement statement = connection.createStatement();
+         ResultSet rs = statement.executeQuery(query)) {
+
+        int previousId = 0;
+        boolean continuous = true;
+
+        if (!rs.next()) {
+            id = 1;
+        } else {
+            do {
+                int nextId = rs.getInt("invoice_id");
+                if (nextId - previousId == 1) {
+                    previousId = nextId;
+                } else {
+                    continuous = false;
+                }
+            } while (rs.next() && continuous);
+
+            id = continuous ? previousId + 1 : previousId + 1;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return id;
+}
+
+    
+  
+
+private void clearTable() {
+    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        new Object[][] {},
+        new String[] { "Product Name", "Amount", "Price" }
+    ));
+}
+    
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code hee:
         new CustomerGUI().setVisible(true);
@@ -374,7 +453,7 @@ public class CheckOutFrame extends javax.swing.JFrame {
         }        
     }
     
-    private void insertInvoice() {
+    private int insertInvoice() {
         // INSERT INTO invoices VALUES (10, 'PAID', 2024-05-24, 100.10, 'cash', 3);        
         try (java.sql.Connection connection = DriverManager.getConnection(main.jdbcUrl, main.dbUsername, main.dbPassword)) {
             String sql1 = "SELECT MAX(invoice_id) as id From invoices;";
@@ -397,11 +476,11 @@ public class CheckOutFrame extends javax.swing.JFrame {
                 statement.setString(6, customerid); 
                 
                 statement.executeUpdate();
-                return;
+                return id;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return;
+            return 0;
         }    
     }    
     /**

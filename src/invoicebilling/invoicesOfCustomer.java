@@ -71,9 +71,14 @@ String name;
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "DATE", "TOTAL PRICE", "METHOD"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -114,7 +119,7 @@ String name;
                 PreparedStatement pstmt=null;
                java.sql.Connection conn=null;
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String url = "jdbc:sqlserver://localhost:1433;databaseName=INVOICEBILLING;user=sa;password=huy;encrypt=true;trustServerCertificate=true";
+                String url = "jdbc:sqlserver://localhost:1433;databaseName=INVOICEBILLING;user=sa;password=123456;encrypt=true;trustServerCertificate=true";
                 conn = DriverManager.getConnection(url);
               
                 String sql = "SELECT invoice_id, status, Date, Total_Price, payment " +
@@ -139,6 +144,17 @@ String name;
                ex.printStackTrace();
             }
     }//GEN-LAST:event_formWindowOpened
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+      int selectedRow=jTable1.getSelectedRow();
+      int invoiceID=(int) jTable1.getValueAt(selectedRow,0);
+     
+      this.dispose();
+      invoiceDetails invoiceDetails=new invoiceDetails();
+      invoiceDetails.invoiceID= invoiceID;
+      invoiceDetails.setVisible(true);
+      
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
